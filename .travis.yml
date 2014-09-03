@@ -5,3 +5,18 @@ node_js:
 - '0.10'
 notifications:
   email: false
+before_deploy:
+- grunt before-deploy
+after_deploy:
+- grunt after-deploy
+deploy:
+  provider: npm
+  email: stephan@boennemann.me
+  on:
+    all_branches: true
+    tags: true
+  api_key:
+    secure: hCUvIFxqKXR059xj4B4BNUbFhKYbQ8KNwkz5yZZ9yZyd4oq2mosOOzVI/yO/K+yJiUWRi24o++BvMS8sJ/xJf4lprzJeMmDEYr+ZLynGuTGYU6E2Zt+ItXTYFJyv4XKMhwgKmYlBGVvl566chtoEZcpKH2AsGYhkTg8JaWMIGyY=
+env:
+  global:
+    secure: bXg0MFUcicZo2sC0zef3TmWHYXeBhR8HghG+sLqohIdP4QVU0WOgKGX3c7S/zi5wYFUVQOUsv1ReBK5eIMK4sr52KD4BKXpnHP8MVxDdioANtH3b4Rt7hG/Bq5qW7oBox7fh71IzSb4NjWOk9F20bnHlWPZ+g4sy3FiiBKkyULA=
