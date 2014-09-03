@@ -29,6 +29,8 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-semantic-release');
 ```
 
+## Setup
+
 This task comes with a setup script. You should be good to go after running this.
 
 ```shell
@@ -40,18 +42,43 @@ This task comes with a setup script. You should be good to go after running this
 ### Overview
 In your project's Gruntfile, add a section named `release` to the data object passed into `grunt.initConfig()`.
 
+Example configuration:
 ```js
 grunt.initConfig({
   release: {
-    bump: 
+    bump: {
+      commitMessage: 'Released v%VERSION%'
+    },
+    email: 'stephan@boennemann.me',
+    name: 'Stephan Bönnemann',
+    payload: function(payload, cb) {
+      payload.body += '\nvery release'
+      payload.body += '\n     such consistent'
+      payload.body += '\n  much information'
+      payload.body += '\nwow'
+      cb(payload);
+    }
   }
 })
 ```
 
 ### Options
 
-#### options.bump
+#### email
+Type: `Array<String>`
+*required*
+
+The email used for git commits.
+
+#### name
+Type: `Array<String>`
+*required*
+
+The name used for git commits.
+
+#### bump
 Type: `Object`
+*optional*
 Default value:
 ```js
 bump: {
@@ -63,27 +90,20 @@ bump: {
 ```
 
 The options object that gets (partly) forwarded to the [grunt-bump](https://github.com/vojtajina/grunt-bump) task.
+
 The task relies on some options for grunt-bump, but there shouldn't be a need to configure this anyways. E.g. when there is a `bower.json` file present in the file system it is added to the files array automatically.
 
-#### options.tasks
+#### tasks
 Type: `Array<String>`
+*optional*
 Default value: `['changelog']`
 
 A list of tasks that prepare files for the release commit.
 Per default the changelog is generated here, but you can do other stuff like minifying a distribution build, generating a list of contributors – basically everything you could imagine and find useful. 
 
-#### options.email
-Type: `Array<String>`
-
-The email used for git commits.
-
-#### options.name
-Type: `Array<String>`
-
-The name used for git commits.
-
-#### options.name
+#### name
 Type: `Function`
+*optional*
 
 ```js
 function(payload, cb) {
