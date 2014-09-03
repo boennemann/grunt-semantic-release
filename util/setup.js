@@ -5,9 +5,17 @@ var fs = require('fs');
 var path = require('path');
 
 var async = require('async');
+var which = require('npm-which').sync;
 var YAML = require('js-yaml');
 
-console.log('You need git, node, npm, grunt, ruby and travis installed.');
+['git', 'grunt', 'travis'].forEach(function(module) {
+  try {
+    which(module);
+  } catch (e) {
+    console.log('ERROR: You need ' + module + ' installed and available in your PATH.');
+    process.exit(0);
+  }
+});
 
 module.exports = function(answers) {
 
@@ -72,16 +80,16 @@ module.exports = function(answers) {
 
   async.series([
     function(cb) {
-      exec('travis sync', handleTravis(cb));
+      exec('travis sync --no-interactive', handleTravis(cb));
     },
     function(cb) {
-      exec('travis enable', handleTravis(cb));
+      exec('travis enable --no-interactive', handleTravis(cb));
     },
     function(cb) {
-      exec('travis encrypt ' + answers.npmToken + ' --add deploy.api_key', handleTravis(cb));
+      exec('travis encrypt ' + answers.npmToken + ' --add deploy.api_key --no-interactive', handleTravis(cb));
     },
     function(cb) {
-      exec('travis encrypt ' + gh + ' --add',  handleTravis(cb));
+      exec('travis encrypt ' + gh + ' --add --no-interactive',  handleTravis(cb));
     },
   ], function() {
     console.log('Done with the `travis` stuff.');

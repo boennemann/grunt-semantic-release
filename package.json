@@ -38,6 +38,7 @@
     "inquirer": "^0.5.1",
     "js-yaml": "^3.1.0",
     "ncp": "^0.6.0",
+    "npm-which": "^1.0.1",
     "semver-regex": "^0.1.1"
   },
   "scripts": {
