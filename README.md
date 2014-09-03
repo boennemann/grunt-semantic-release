@@ -82,6 +82,23 @@ Type: `Array<String>`
 
 The name used for git commits.
 
+#### options.name
+Type: `Function`
+
+```js
+function(payload, cb) {
+  getAwesomeContextualGif(function(url) {
+    payload.body += '![yo](' + url + ')';
+    cb(payload);
+  })
+}
+```
+
+You can use this function to manipulate the [payload](https://mikedeboer.github.io/node-github/#releases.prototype.createRelease) for the GitHub release.
+For example you could search the internet for an amazing gif and append it to the message body.
+
+The `payload` object already contains information about the `repo`, `owner` and `tag_name`; the `body` is set to the current changelog. 
+
 ## Caveats
 This grunt tasks is extracted from [hood.ie's](http://hood.ie) release [process](https://github.com/hoodiehq/grunt-release-hoodie) and thus tightly coupled to the tools, conventions and needs of hoodie.
 Extracting this into it's own general purpose task is the first of several steps to make this more universally applicable.

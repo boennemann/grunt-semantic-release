@@ -63,9 +63,17 @@ module.exports = function(grunt) {
       });
     });
 
-    // run(function() {
-    // TODO: add way to hook into the payload to e.g. append gifs
-    // });
+    var fn = (grunt.config.get('release') || {}).payload;
+    if (fn && typeof fn === 'function') {
+      run(function() {
+        fn(releasePayload, function(payload) {
+          if (payload) {
+            releasePayload = payload;
+          }
+          next();
+        });
+      });
+    }
 
     run(function() {
       github.authenticate({
