@@ -101,7 +101,7 @@ Default value: `['changelog']`
 A list of tasks that prepare files for the release commit.
 Per default the changelog is generated here, but you can do other stuff like minifying a distribution build, generating a list of contributors – basically everything you could imagine and find useful. 
 
-#### name
+#### payload
 Type: `Function`
 *optional*
 
