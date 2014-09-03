@@ -9,8 +9,9 @@ Using this plugin it is possible to release a new version with just `grunt relea
 
 This will
 - ,based on changes made, determine the correct semantic version to release. (Yes the checkboxes are prechecked for you).
+- generate a changelog using [conventional-changelog](https://www.npmjs.org/package/conventional-changelog)
 - only release code that doesn't fail it's tests.
-- generate the release on (Travis)CI, rather than on a local, error-prone machine.
+- generate the release on TravisCI, rather than on a local, error-prone machine.
 - publish the new version to npm and GitHub Releases.
 
 Here is an [example release](https://github.com/hoodiehq/hoodie-cli/releases/tag/v0.5.5).
@@ -52,7 +53,7 @@ grunt.initConfig({
 #### options.bump
 Type: `Object`
 Default value:
-```
+```js
 bump: {
   commitMessage: 'chore(release): v%VERSION%',
   files: ['package.json', 'bower.json', 'component.json'],
@@ -80,6 +81,15 @@ The email used for git commits.
 Type: `Array<String>`
 
 The name used for git commits.
+
+## Caveats
+This grunt tasks is extracted from [hood.ie's](http://hood.ie) release [process](https://github.com/hoodiehq/grunt-release-hoodie) and thus tightly coupled to the tools, conventions and needs of hoodie.
+Extracting this into it's own general purpose task is the first of several steps to make this more universally applicable.
+
+Currently it is required to:
+- host code on GitHub
+- use Travis for CI
+- adhere to the [angular commit message guidelines](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines)
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
