@@ -1,3 +1,12 @@
+<a name="0.2.1"></a>
+### 0.2.1 (2014-09-04)
+
+
+#### Bug Fixes
+
+* **assets:** add back asset folder fix #5 ([d6561125](git@github.com:boennemann/grunt-semantic-release/commit/d65611259828b732a0c9794420cdba2d2f4f6aea))
+
+
 <a name="0.2.0"></a>
 ## 0.2.0 (2014-09-03)
 
