@@ -16,6 +16,14 @@ This will
 
 Here is an [example release](https://github.com/hoodiehq/hoodie-cli/releases/tag/v0.5.5).
 
+## Usage
+
+- `grunt release`: suggests correct version
+- `grunt release:patch`: 0.0.1 => 0.0.2
+- `grunt release:minor`: 0.0.2 => 0.1.0
+- `grunt release:major`: 0.1.0 => 1.0.0
+- `grunt release --setversion=4.12.3-alpha.19`: 1.0.0 => 4.12.3-alpha.19
+
 ## Getting Started
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
