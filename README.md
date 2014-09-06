@@ -3,16 +3,16 @@
 [![Dependency Status](https://david-dm.org/boennemann/grunt-semantic-release.svg)](https://david-dm.org/boennemann/grunt-semantic-release)
 [![devDependency Status](https://david-dm.org/boennemann/grunt-semantic-release/dev-status.svg)](https://david-dm.org/boennemann/grunt-semantic-release#info=devDependencies)
 
-![grunt-semantic-release](https://cloud.githubusercontent.com/assets/908178/3786831/72e2b5ea-19e7-11e4-9ad2-b382adb4dea8.png)
-
 Using this plugin it is possible to release a new version with just `grunt release`.
 
+![grunt-semantic-release](https://cloud.githubusercontent.com/assets/908178/3786831/72e2b5ea-19e7-11e4-9ad2-b382adb4dea8.png)
+
 This will
-- ,based on changes made, determine the correct semantic version to release. (Yes the checkboxes are prechecked for you).
-- generate a changelog using [conventional-changelog](https://www.npmjs.org/package/conventional-changelog)
-- only release code that doesn't fail it's tests.
-- generate the release on TravisCI, rather than on a local, error-prone machine.
-- publish the new version to npm and GitHub Releases.
+- determine the correct [semantic version](http://semver.org/) to release (yes the checkboxes are prechecked for you)
+- generate a [conventional-changelog](https://www.npmjs.org/package/conventional-changelog)
+- release code that doesn't fail it's tests only
+- generate distribution files on Travis CI, rather than on a local, error-prone machine
+- publish the new version to npm and [GitHub Releases](https://github.com/blog/1547-release-your-software)
 
 Here is an [example release](https://github.com/hoodiehq/hoodie-cli/releases/tag/v0.5.5).
 
@@ -39,7 +39,7 @@ grunt.loadNpmTasks('grunt-semantic-release');
 
 ## Setup
 
-This task comes with a setup script. You should be good to go after running this.
+This task comes with a setup script, that takes care of registering all necessary build hooks in the `.travis.yml` file and encrypting necessary tokens.
 
 ```shell
 ./node_modules/.bin/setup
@@ -50,22 +50,12 @@ This task comes with a setup script. You should be good to go after running this
 ### Overview
 In your project's Gruntfile, add a section named `release` to the data object passed into `grunt.initConfig()`.
 
-Example configuration:
+Example for a minimal configuration:
 ```js
 grunt.initConfig({
   release: {
-    bump: {
-      commitMessage: 'Released v%VERSION%'
-    },
     email: 'stephan@boennemann.me',
-    name: 'Stephan Bönnemann',
-    payload: function(payload, cb) {
-      payload.body += '\nvery release'
-      payload.body += '\n     such consistent'
-      payload.body += '\n  much information'
-      payload.body += '\nwow'
-      cb(payload);
-    }
+    name: 'Stephan Bönnemann'
   }
 })
 ```
@@ -87,6 +77,7 @@ The name used for git commits.
 #### bump
 Type: `Object`
 *optional*
+
 Default value:
 ```js
 bump: {
@@ -104,6 +95,7 @@ The task relies on some options for grunt-bump, but there shouldn't be a need to
 #### tasks
 Type: `Array<String>`
 *optional*
+
 Default value: `['changelog']`
 
 A list of tasks that prepare files for the release commit.
@@ -116,7 +108,7 @@ Type: `Function`
 ```js
 function(payload, cb) {
   getAwesomeContextualGif(function(url) {
-    payload.body += '![yo](' + url + ')';
+    payload.body += '\n![yo](' + url + ')';
     cb(payload);
   })
 }
