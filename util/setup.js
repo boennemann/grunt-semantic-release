@@ -94,10 +94,10 @@ module.exports = function(answers) {
   ], function() {
     console.log('Done with the `travis` stuff.');
     console.log('Now add this to your README.md if not done already and everything should be up and running\n');
-    console.log('[![Build Status](https://travis-ci.org/hoodiehq/{REPONAME}.svg)](https://travis-ci.org/hoodiehq/{REPONAME})');
-    console.log('[![Dependency Status](https://david-dm.org/hoodiehq/{REPONAME}.svg)](https://david-dm.org/hoodiehq/{REPONAME})');
-    console.log('[![devDependency Status](https://david-dm.org/hoodiehq/{REPONAME}/dev-status.svg)](https://david-dm.org/hoodiehq/{REPONAME}#info=devDependencies)\n');
-    console.log('You have to replace all occurances of {REPONAME}, obiously.\n');
+    console.log('[![Build Status](https://travis-ci.org/{OWNER}/{REPONAME}.svg)](https://travis-ci.org/{OWNER}/{REPONAME})');
+    console.log('[![Dependency Status](https://david-dm.org/{OWNER}/{REPONAME}.svg)](https://david-dm.org/{OWNER}/{REPONAME})');
+    console.log('[![devDependency Status](https://david-dm.org/{OWNER}/{REPONAME}/dev-status.svg)](https://david-dm.org/{OWNER}/{REPONAME}#info=devDependencies)\n');
+    console.log('You have to replace all occurances of {OWNER} and {REPONAME}, obiously.\n');
     console.log('git add package.json README.md CHANGELOG.md Gruntfile.js .travis.yml');
     console.log('git commit -m \'chore(grunt): setup grunt-release-hoodie\'');
     console.log('git push origin master');
