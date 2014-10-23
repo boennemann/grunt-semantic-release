@@ -22,7 +22,7 @@ module.exports = function(grunt) {
       files: options.bump.files || ['package.json'],
       commit: false,
       createTag: true,
-      tagName: 'release-v%VERSION%',
+      tagName: options.bump.tagName + '%VERSION%' || 'release-v%VERSION%',
       pushTo: options.bump.pushTo || 'origin master',
     };
 
