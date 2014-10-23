@@ -22,7 +22,7 @@ module.exports = function(grunt) {
       files: options.bump.files || ['package.json'],
       commit: false,
       createTag: true,
-      tagName: 'release-v%VERSION%',
+      tagName: options.bump.tagName + '%VERSION%' || 'release-v%VERSION%',
       pushTo: options.bump.pushTo || 'origin master',
     };
 
@@ -31,12 +31,13 @@ module.exports = function(grunt) {
     if (grunt.option('debug')) {
       bump.push = false;
     }
-
+    
     grunt.registerTask('set-tag', function() {
       var pkg = grunt.file.readJSON('./package.json');
-      grunt.option('deletetag', 'release-v'+pkg.version);
+      var tagDel = bump.tagName.split('%VERSION%')[0]+pkg.version;
+      grunt.option('deletetag', tagDel);
     });
-
+    
     grunt.registerTask('reset-package', function() {
       fs.writeFileSync('./package.json', originalPackage);
     });
